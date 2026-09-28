@@ -1,0 +1,1 @@
+"""Feature extraction: ``antony`` (families A-E), ``extended`` (extended covariates, engagement controls, orchestrator), ``indicators`` (binary mechanism indicators), ``signals`` (SQL machinery), ``enhanced`` (laboratory summaries, composites, configuration builder), ``omop2obo`` (HPO symptom mapping)."""

@@ -29,5 +29,5 @@ conda activate "$CONDA_ENV"
 echo "Job started at: $(date)  (job $LSB_JOBID on $HOSTNAME)"
 cd "$REPO_DIR"
 export PYTHONNOUSERSITE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 ANTONY_N_JOBS=15
-python run_enhanced_mechsig.py
+python scripts/run_main_analysis.py
 echo "Job completed at: $(date)"

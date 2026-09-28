@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pasc-mechsig"
+version = "1.0.0"
+description = "Predicting post-acute sequelae of COVID-19 from OMOP EHR data: mechanism-based feature sets versus an acute-phase baseline"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Jonas Marek Ebner" }]
+keywords = ["PASC", "long COVID", "OMOP", "EHR", "random forest", "Boruta", "SHAP"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+# Pinned to the versions of the thesis run (Appendix A.5); see requirements.txt.
+dependencies = [
+  "numpy==1.26.4",
+  "pandas==2.3.3",
+  "pyarrow>=14",
+  "scipy>=1.11",
+  "scikit-learn==1.8.0",
+  "Boruta==0.4.3",
+  "shap==0.49.1",
+  "lightgbm==4.6.0",
+  "statsmodels>=0.14",
+  "joblib>=1.3",
+  "matplotlib>=3.8",
+  "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+hana = ["hdbcli>=2.19"]          # SAP HANA driver (AIR·MS)
+figures = ["jupyter", "nbconvert"]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = ["slow: fits a forest with Boruta and SHAP (a few seconds)"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["src", "scripts", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+ignore = ["E501", "E402", "E731", "E741"]

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Launch one LSF job per (feature window, symptom group) for the secondary
-# analysis S1 (run_subtype_multilabel_aligned.py). Each group writes to its own
+# analysis S1 (scripts/run_symptom_groups.py). Each group writes to its own
 # results/symptom_groups/perc97/<window>/<config>/iterations_<group>.csv, so
 # jobs never collide, and PASC_SKIP_EXISTING lets a re-launch resume.
 #
@@ -10,7 +10,7 @@
 #
 #   export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 ANTONY_N_JOBS=4
 #   PASC_REEXTRACT=1 PASC_EXTRACT_ONLY=1 PASC_FEATURE_WINDOWS=0_90 \
-#     python run_subtype_multilabel_aligned.py
+#     python scripts/run_symptom_groups.py
 #
 # Then submit one modelling job per group (reuses the caches, no database):
 #   hpc/submit_subtype_window.sh 0_90 cognitive              # one group
@@ -48,4 +48,4 @@ bsub -P "$LSF_ALLOCATION" \
              ANTONY_N_JOBS=15 PASC_REEXTRACT=0 PASC_SKIP_EXISTING=1 \
              PASC_FEATURE_WINDOWS=${W} ${SUBTYPE_ENV}; \
       cd $REPO_DIR; \
-      python run_subtype_multilabel_aligned.py"
+      python scripts/run_symptom_groups.py"

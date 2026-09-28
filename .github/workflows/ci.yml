@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Lint
+        run: ruff check src scripts tests
+      - name: Import every module and every entry point's header
+        run: |
+          python -c "import pasc, pasc.db, pasc.cohort.antony, pasc.cohort.combined, pasc.features.antony, pasc.features.extended, pasc.features.indicators, pasc.features.signals, pasc.features.enhanced, pasc.features.omop2obo, pasc.modeling.pipeline, pasc.modeling.calibration, pasc.analysis.paired"
+          python scripts/paired_tests.py --help
+      - name: Tests
+        run: python -m pytest

@@ -7,13 +7,13 @@
 #
 # Prerequisite: the per-window feature matrices exist in cohort_parquets/
 # (one extraction pass with database access):
-#   PASC_REEXTRACT=1 PASC_EXTRACT_ONLY=1 python run_enhanced_mechsig.py
+#   PASC_REEXTRACT=1 PASC_EXTRACT_ONLY=1 python scripts/run_main_analysis.py
 #
 # Usage:
 #   hpc/submit_window.sh 0_21                      # one window
 #   for W in 0_21 0_30 0_60 0_90 30_60 60_90; do hpc/submit_window.sh $W; done   # all six
 #
-# Runs whatever ACTIVE_CONFIGS is set to in run_enhanced_mechsig.py (or
+# Runs whatever ACTIVE_CONFIGS is set to in scripts/run_main_analysis.py (or
 # PASC_ACTIVE_CONFIGS from the environment).
 
 set -euo pipefail
@@ -35,4 +35,4 @@ bsub -P "$LSF_ALLOCATION" \
              ANTONY_N_JOBS=15 PASC_REEXTRACT=0 PASC_SKIP_EXISTING=1 PASC_FAST_MODE=0 \
              PASC_FEATURE_WINDOWS=${W} ${PASC_ACTIVE_CONFIGS:+PASC_ACTIVE_CONFIGS=$PASC_ACTIVE_CONFIGS}; \
       cd $REPO_DIR; \
-      python run_enhanced_mechsig.py"
+      python scripts/run_main_analysis.py"

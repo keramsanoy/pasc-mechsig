@@ -13,7 +13,7 @@ Everything except the acute-window severity rows should agree between them, so
 the pair doubles as a severity cross-check.
 
 Race / ethnicity lives in no parquet; it is pulled live from the OMOP
-``CDMPHI.person`` table (reusing the ``init.hana_conn`` connection) and cached to
+``CDMPHI.person`` table (reusing the ``pasc.db.connect()`` connection) and cached to
 ``race_ethnicity_by_person.parquet`` so the tables rebuild offline afterwards.
 
 Outputs (results/descriptives/):
@@ -41,10 +41,8 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-ROOT = Path(__file__).resolve().parent.parent
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-from pasc_paths import COHORT_DIR, DESCRIPTIVES_DIR as OUTDIR  # noqa: E402  (both may live outside the repo)
+import _bootstrap  # noqa: E402,F401  (makes `pasc` importable from a plain clone)
+from pasc.config.paths import REPO_ROOT as ROOT, COHORT_DIR, DESCRIPTIVES_DIR as OUTDIR  # noqa: E402
 
 PRIMARY_PARQUET = COHORT_DIR / "enhanced_w0_90_strict_all_patients.parquet"
 ACUTE_PARQUET = COHORT_DIR / "enhanced_w0_21_strict_all_patients.parquet"
@@ -75,7 +73,7 @@ RACE_BUCKETS = [
     "Asian / other / unknown",
 ]
 
-from omop_config import CDM_SCHEMA  # OMOP schema name; set OMOP_CDM_SCHEMA to override
+from pasc.config.omop import CDM_SCHEMA  # OMOP schema name; set OMOP_CDM_SCHEMA to override
 
 
 # --------------------------------------------------------------------------- #
@@ -266,8 +264,8 @@ def fetch_race_ethnicity(person_ids: list[int]) -> pd.DataFrame:
     """
     if str(ROOT) not in sys.path:
         sys.path.insert(0, str(ROOT))
-    import init  # noqa: F401  -- establishes hana_conn (prompts for credentials)
-    from init import hana_conn
+    from pasc.db import connect
+    hana_conn = connect()
 
     cur = hana_conn.cursor()
     try:
