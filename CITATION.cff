@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the thesis."
+title: "Predicting Post-Acute Sequelae of COVID-19 from Electronic Health Records: The Added Value of Mechanism-Based Feature Sets (analysis code)"
+authors:
+  - family-names: Ebner
+    given-names: Jonas Marek
+type: software
+date-released: 2026-09-30
+preferred-citation:
+  type: thesis
+  title: "Predicting Post-Acute Sequelae of COVID-19 from Electronic Health Records: The Added Value of Mechanism-Based Feature Sets"
+  authors:
+    - family-names: Ebner
+      given-names: Jonas Marek
+  institution:
+    name: "Hasso Plattner Institute, University of Potsdam"
+  thesis-type: "Master's thesis"
+  year: 2026

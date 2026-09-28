@@ -1,0 +1,35 @@
+# --- Patient-level data and everything derived from it: never commit --------
+cohort_parquets/
+results/
+logs/
+*.parquet
+*.pkl
+*.joblib
+*.npz
+*.h5
+
+# --- Credentials and site configuration --------------------------------------
+.env
+hpc/env.local.sh
+
+# --- Public reference data (downloaded, see README) --------------------------
+data/omop2obo/*.csv
+data/omop2obo/*.xlsx
+data/omop2obo/*.json
+data/omop2obo/*.zip
+!data/omop2obo/.gitkeep
+
+# --- Python / Jupyter ---------------------------------------------------------
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+*.egg-info/
+.venv/
+.mypy_cache/
+.pytest_cache/
+
+# --- Editors / OS -------------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+tmux-server-*.log

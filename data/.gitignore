@@ -1,0 +1,6 @@
+# Public OMOP2OBO mapping file (Zenodo 10.5281/zenodo.7255922); download instructions in README.md
+omop2obo/*.csv
+omop2obo/*.xlsx
+omop2obo/*.json
+omop2obo/*.zip
+!omop2obo/.gitkeep

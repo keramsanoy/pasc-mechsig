@@ -1,0 +1,19 @@
+# Versions used for the thesis run (Appendix A.5; Python 3.12.0). Pin them for an
+# exact reproduction: scikit-learn in particular fits different forests across releases.
+numpy==1.26.4
+pandas==2.3.3
+pyarrow>=14
+scipy>=1.11
+scikit-learn==1.8.0
+Boruta==0.4.3
+shap==0.49.1
+lightgbm==4.6.0
+statsmodels>=0.14
+joblib>=1.3
+matplotlib>=3.8
+python-dotenv>=1.0
+# Database driver for SAP HANA (AIR·MS). Replace with your site's DB-API driver
+# and adapt init.py when the OMOP CDM lives elsewhere.
+hdbcli>=2.19
+# Only for make_thesis_figures.ipynb
+jupyter
